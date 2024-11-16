@@ -18,10 +18,10 @@ def fetch_and_save_csv():
         response.raise_for_status()
         
         # Write the content to "hinnaandmed.csv"
-        with open("hinnaandmed.csv", mode="wb") as file:
+        with open("pildiraam/hinnaandmed.csv", mode="wb") as file:
             file.write(response.content)
         
-        with open("hindadevärskendamiseaeg.txt", mode="w", encoding="utf-8") as file:
+        with open("pildiraam/hindadevärskendamiseaeg.txt", mode="w", encoding="utf-8") as file:
             file.write(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     except requests.exceptions.RequestException as e:
