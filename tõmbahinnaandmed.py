@@ -17,7 +17,7 @@ def fetch_and_save_csv():
         response = requests.get(ELERING_CSV_URL)
         response.raise_for_status()
         
-        # Write the content to "pulled.csv"
+        # Write the content to "hinnaandmed.csv"
         with open("hinnaandmed.csv", mode="wb") as file:
             file.write(response.content)
         
