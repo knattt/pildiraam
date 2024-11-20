@@ -4,6 +4,7 @@ from matplotlib.dates import DateFormatter, HourLocator
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 from tkinterweb import HtmlFrame  # Import HtmlFrame for embedding HTML content
+from inkblots_mpl import generate_trace, plot
 
 def plot_data():
     # Load the CSV file with specified encoding and delimiter
@@ -74,6 +75,16 @@ widget_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)  # Add padding here
 weather_label = HtmlFrame(widget_frame)
 weather_label.pack(fill=tk.BOTH, expand=True)
 weather_label.load_url("https://www.yr.no/en/content/2-588335/card.html")
+
+
+# Tanel lisas Inkblot asja
+if __name__ == '__main__':
+      n = 5000 #Number of steps
+      num_w = 3 #Number of walks
+
+      x_arrays, y_arrays = generate_trace(n, num_w)
+      plot(x_arrays, y_arrays)
+
 
 # Run the Tkinter main loop
 root.mainloop()
