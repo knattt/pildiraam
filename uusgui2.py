@@ -25,7 +25,7 @@ def plot_data():
     fig, ax = plt.subplots(figsize=(4.8, 4))  # Adjust to half the height of the window (400px)
 
     # Bar plot of "Eesti aeg" vs. "NPS Eesti"
-    bar_width = 0.02  # Adjusted width to ensure gaps
+    bar_width = 0.04  # Adjusted width to ensure gaps
     ax.bar(timestamps, df["NPS Eesti"], color="black", width=bar_width, align="edge", edgecolor="white")
 
     # Set x-ticks at the left edge of each bar
@@ -38,13 +38,12 @@ def plot_data():
     ax.set_ylabel("s/kWh")
     ax.tick_params(axis="x", rotation=90)  # Rotate x-axis labels for better readability
 
-    # Add the "Uuendatud" text at the bottom
-    ax.text(
-        0, -0.2,  # Position just below the x-axis
+    # Add the "Uuendatud" text below the plot
+    fig.text(
+        0.01, 0.01,  # Position near the bottom-left corner
         f"Uuendatud: {update_time}",
-        fontsize=10,  # Smaller font size
-        ha="left",  # Align to the left
-        transform=ax.transAxes  # Use Axes-relative positioning
+        fontsize=8,  # Smaller font size
+        ha="left"  # Align to the left
     )
 
     # Embed the plot in the Tkinter window
