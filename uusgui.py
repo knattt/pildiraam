@@ -40,6 +40,7 @@ def plot_data():
         fontsize=10,  # Smaller font size
         ha="left",  # Align to the left
         transform=ax.transAxes  # Use Axes-relative positioning
+        )
 
     # Embed the plot in the Tkinter window
     canvas = FigureCanvasTkAgg(fig, master=root)
