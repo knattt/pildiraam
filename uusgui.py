@@ -8,17 +8,14 @@ def plot_data():
     # Load the CSV file
     df = pd.read_csv("hinnaandmed.csv", encoding="ISO-8859-1", sep=";") 
 
-    # Convert "Ajatempel (UTC)" to datetime if not already in that format
-    df["Ajatempel (UTC)"] = pd.to_datetime(df["Ajatempel (UTC)"])
-
     # Replace commas in "NPS Eesti" with dots, convert to float
     df["NPS Eesti"] = df["NPS Eesti"].str.replace(",", ".").astype(float)
 
     # Create a Matplotlib figure
     fig, ax = plt.subplots(figsize=(4.8, 4))  # Adjust to half the height of the window (400px)
 
-    # Bar plot of "Ajatempel (UTC)" vs. "NPS Eesti"
-    ax.bar(df.iloc[:, 1], df["NPS Eesti"], color="black", width=0.04, align="center")
+    # Bar plot of "Eesti aeg" vs. "NPS Eesti"
+    ax.bar(pd.to_datetime(df.iloc[:, 1]), df["NPS Eesti"], color="black", width=0.04, align="center")
 
     # Customize the x-axis to show only time
     from matplotlib.dates import DateFormatter
@@ -26,10 +23,9 @@ def plot_data():
     ax.xaxis.set_major_formatter(time_format)
 
     # Customize the plot
-    ax.set_title("Elektrihind (s/kWh)")
+    ax.set_title("Elektrihind")
     ax.set_ylabel("s/kWh")
-    ax.set_xlabel("Ajatempel (UTC)")
-    ax.tick_params(axis="x", rotation=45)  # Rotate x-axis labels for better readability
+    ax.tick_params(axis="x", rotation=90)  # Rotate x-axis labels for better readability
 
     # Embed the plot in the Tkinter window
     canvas = FigureCanvasTkAgg(fig, master=root)
