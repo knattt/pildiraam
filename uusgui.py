@@ -20,6 +20,11 @@ def plot_data():
     # Bar plot of "Ajatempel (UTC)" vs. "NPS Eesti"
     ax.bar(df.iloc[:, 1], df["NPS Eesti"], color="black", width=0.04, align="center")
 
+    # Customize the x-axis to show only time
+    from matplotlib.dates import DateFormatter
+    time_format = DateFormatter("%H:%M")  # Format for hours and minutes
+    ax.xaxis.set_major_formatter(time_format)
+
     # Customize the plot
     ax.set_title("Elektrihind (s/kWh)")
     ax.set_ylabel("s/kWh")
