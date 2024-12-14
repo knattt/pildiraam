@@ -18,7 +18,7 @@ def plot_data():
     fig, ax = plt.subplots(figsize=(4.8, 4))  # Adjust to half the height of the window (400px)
 
     # Bar plot of "Ajatempel (UTC)" vs. "NPS Eesti"
-    ax.bar(df["Ajatempel (UTC)"], df["NPS Eesti"], color="black", width=0.04, align="center")
+    ax.bar(df[1], df["NPS Eesti"], color="black", width=0.04, align="center")
 
     # Customize the plot
     ax.set_title("Elektrihind (s/kWh)")
