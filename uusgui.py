@@ -15,7 +15,7 @@ def plot_data():
     fig, ax = plt.subplots(figsize=(4.8, 4))  # Adjust to half the height of the window (400px)
 
     # Bar plot of "Eesti aeg" vs. "NPS Eesti"
-    ax.bar(pd.to_datetime(df.iloc[:, 1]), df["NPS Eesti"], color="black", width=0.04, align="center")
+    ax.bar(pd.to_datetime(df.iloc[:, 1], dayFirst=True), df["NPS Eesti"], color="black", width=0.04, align="center")
 
     # Customize the x-axis to show only time
     from matplotlib.dates import DateFormatter
