@@ -3,14 +3,15 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, HourLocator
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
-import webbrowser  # Import webbrowser for opening URLs
+from tkinterweb import HtmlFrame  # Import HtmlFrame for embedding HTML content
+from inkblots_mpl import generate_trace, plot
 
 def plot_data():
     # Load the CSV file with specified encoding and delimiter
     df = pd.read_csv("hinnaandmed.csv", encoding="ISO-8859-1", sep=";")
 
     # Replace any incorrect characters in the column names
-    df.columns = [col.replace(" ", "ä") for col in df.columns]
+    df.columns = [col.replace("�", "ä") for col in df.columns]
 
     # Replace commas with dots in the "NPS Eesti" column, convert to float, and divide by 10
     df["NPS Eesti"] = df["NPS Eesti"].str.replace(",", ".").astype(float) / 10
@@ -58,10 +59,6 @@ def plot_data():
     canvas.draw()
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
-# Function to open weather widget in the default browser
-def open_weather_widget():
-    webbrowser.open("https://www.yr.no/en/content/2-588335/card.html")
-
 # Set up the Tkinter window
 root = tk.Tk()
 root.title("Elektrihind ja Ilm")
@@ -70,12 +67,24 @@ root.geometry("480x800")
 # Top half for the plot
 plot_data()
 
-# Bottom half for the weather widget
+# Bottom half for the weather widget with padding
 widget_frame = tk.Frame(root)
-widget_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+widget_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)  # Add padding here
 
-weather_button = tk.Button(widget_frame, text="Open Weather Widget", command=open_weather_widget)
-weather_button.pack(fill=tk.BOTH, expand=True)
+# HTML frame to display the weather widget with padding
+weather_label = HtmlFrame(widget_frame)
+weather_label.pack(fill=tk.BOTH, expand=True)
+weather_label.load_url("https://www.yr.no/en/content/2-588335/card.html")
+
+
+# Tanel lisas Inkblot asja
+if __name__ == '__main__':
+      n = 5000 #Number of steps
+      num_w = 3 #Number of walks
+
+      x_arrays, y_arrays = generate_trace(n, num_w)
+      plot(x_arrays, y_arrays)
+
 
 # Run the Tkinter main loop
 root.mainloop()
