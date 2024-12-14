@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
 import webview
-import subprocess
-import os
 
 def plot_data():
     # Load the CSV file
@@ -37,14 +35,6 @@ def show_weather_widget():
     # Launch the weather widget in a webview
     webview.create_window("Weather Widget", "https://www.yr.no/en/content/2-588335/card.html", width=480, height=400)
     webview.start()
-
-def close_existing_script():
-    # Kill any existing instance of the script if already running
-    current_script = os.path.basename(__file__)
-    subprocess.call(["pkill", "-f", current_script])
-
-# Kill any previously running instance of this script
-close_existing_script()
 
 # Initialize the Tkinter window
 root = tk.Tk()
