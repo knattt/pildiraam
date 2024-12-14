@@ -6,7 +6,7 @@ import webview
 
 def plot_data():
     # Load the CSV file
-    df = pd.read_csv("hinnaandmed.csv", encoding="utf-8", sep=";")
+    df = pd.read_csv("hinnaandmed.csv", sep=";") # encoding="utf-8", 
 
     # Convert "Ajatempel (UTC)" to datetime if not already in that format
     df["Ajatempel (UTC)"] = pd.to_datetime(df["Ajatempel (UTC)"])
