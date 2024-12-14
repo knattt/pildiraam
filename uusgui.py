@@ -16,7 +16,12 @@ def plot_data():
 
     # Bar plot of "Eesti aeg" vs. "NPS Eesti"
     bar_width = 0.02  # Adjusted width to ensure gaps
-    ax.bar(pd.to_datetime(df.iloc[:, 1], dayfirst=True), df["NPS Eesti"], color="black", width=0.04, align="center", edgecolor="white")
+    ax.bar(pd.to_datetime(df.iloc[:, 1], dayfirst=True), df["NPS Eesti"]/10, color="black", width=0.04, align="center", edgecolor="white")
+
+    # Set x-ticks at the left edge of each bar
+    tick_positions = timestamps - pd.Timedelta(seconds=bar_width * 3600)  # Adjust ticks to left edge
+    ax.set_xticks(tick_positions)
+    ax.set_xticklabels(timestamps.dt.strftime("%H:%M"))  # Format for hours and minutes
 
     # Customize the x-axis to show only time
     from matplotlib.dates import DateFormatter
@@ -27,6 +32,14 @@ def plot_data():
     ax.set_title("Elektrihind")
     ax.set_ylabel("s/kWh")
     ax.tick_params(axis="x", rotation=90)  # Rotate x-axis labels for better readability
+
+    # Add the "Uuendatud" text at the bottom
+    ax.text(
+        0, -0.2,  # Position just below the x-axis
+        f"Uuendatud: {update_time}",
+        fontsize=10,  # Smaller font size
+        ha="left",  # Align to the left
+        transform=ax.transAxes  # Use Axes-relative positioning
 
     # Embed the plot in the Tkinter window
     canvas = FigureCanvasTkAgg(fig, master=root)
