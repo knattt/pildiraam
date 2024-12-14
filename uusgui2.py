@@ -24,9 +24,12 @@ def plot_data():
     # Create a Matplotlib figure
     fig, ax = plt.subplots(figsize=(4.8, 4))  # Adjust to half the height of the window (400px)
 
+    # Adjust bottom margin to make room for the text
+    plt.subplots_adjust(bottom=0.2)  # Increase bottom margin to 20% of the figure
+
     # Bar plot of "Eesti aeg" vs. "NPS Eesti"
-    bar_width = 0.04  # Adjusted width to ensure gaps
-    ax.bar(timestamps, df["NPS Eesti"], color="black", width=bar_width, align="edge", edgecolor="white")
+    bar_width = 0.02  # Adjusted width to ensure gaps
+    ax.bar(timestamps, df["NPS Eesti"]/10, color="black", width=bar_width, align="edge", edgecolor="white")
 
     # Set x-ticks at the left edge of each bar
     tick_positions = timestamps - pd.Timedelta(seconds=bar_width * 3600)  # Adjust ticks to left edge
@@ -40,7 +43,7 @@ def plot_data():
 
     # Add the "Uuendatud" text below the plot
     fig.text(
-        0.01, 0.01,  # Position near the bottom-left corner
+        0.01, 0.03,  # Position near the bottom-left corner with more vertical space
         f"Uuendatud: {update_time}",
         fontsize=8,  # Smaller font size
         ha="left"  # Align to the left
