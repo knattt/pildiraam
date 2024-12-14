@@ -28,7 +28,7 @@ def plot_data():
     plt.subplots_adjust(bottom=0.2)  # Increase bottom margin to 20% of the figure
 
     # Bar plot of "Eesti aeg" vs. "NPS Eesti"
-    bar_width = 0.02  # Adjusted width to ensure gaps
+    bar_width = 0.05  # Adjusted width to ensure gaps
     ax.bar(timestamps, df["NPS Eesti"]/10, color="black", width=bar_width, align="edge", edgecolor="white")
 
     # Set x-ticks at the left edge of each bar
